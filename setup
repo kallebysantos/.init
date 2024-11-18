@@ -1,0 +1,24 @@
+#!/bin/bash
+
+export NONINTERACTIVE=1
+
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+packages=(
+  neovim
+  ripgrep
+  lazygit
+  fzf
+)
+
+# Iterate over the array and install each package
+for package in "${packages[@]}"; do
+  echo "Installing $package..."
+  /home/linuxbrew/.linuxbrew/bin/brew install "$package"
+done
+
+echo "All packages have been installed."
+
+# Neovim setup
+git clone git@github.com:kallebysantos/init.lua.git -b lazyvim .config/nvim
